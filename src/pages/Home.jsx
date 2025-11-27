@@ -17,7 +17,7 @@ const Home = () => {
                         transition={{ duration: 0.8 }}
                         className="text-5xl md:text-7xl font-serif font-bold text-white mb-6 drop-shadow-lg"
                     >
-                        Artisan Baking with Love
+                        Precision Baking, Personalized Taste
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -25,7 +25,7 @@ const Home = () => {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="text-xl md:text-2xl text-white/90 mb-8 font-light"
                     >
-                        Handcrafted pastries, cakes, and breads made fresh daily.
+                        Shash's Bakehouse specializes in custom cakes and desserts, pouring heart and skill into every unique creation.
                     </motion.p>
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}

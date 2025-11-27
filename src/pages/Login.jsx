@@ -7,14 +7,27 @@ const Login = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        // Simple mock auth for demonstration
-        if (username === 'admin' && password === 'password') {
-            localStorage.setItem('isAuthenticated', 'true');
-            navigate('/admin');
-        } else {
-            setError('Invalid credentials');
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080'}/api/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                localStorage.setItem('isAuthenticated', 'true');
+                localStorage.setItem('username', data.username);
+                navigate('/admin');
+            } else {
+                setError('Invalid credentials');
+            }
+        } catch (err) {
+            setError('Login failed. Please try again.');
         }
     };
 

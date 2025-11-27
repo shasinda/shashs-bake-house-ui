@@ -2,13 +2,15 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PortfolioManager from '../components/PortfolioManager';
 import NotesManager from '../components/NotesManager';
+import ChangePassword from '../components/ChangePassword';
 
 const AdminDashboard = () => {
     const navigate = useNavigate();
-    const [activeTab, setActiveTab] = useState('portfolio'); // portfolio, notes
+    const [activeTab, setActiveTab] = useState('portfolio'); // portfolio, notes, settings
 
     const handleLogout = () => {
         localStorage.removeItem('isAuthenticated');
+        localStorage.removeItem('username');
         navigate('/login');
     };
 
@@ -41,11 +43,18 @@ const AdminDashboard = () => {
                     >
                         Notes / Blog
                     </button>
+                    <button
+                        onClick={() => setActiveTab('settings')}
+                        className={`px-4 py-2 rounded-md ${activeTab === 'settings' ? 'bg-primary text-white' : 'bg-white text-gray-600'}`}
+                    >
+                        Settings
+                    </button>
                 </div>
 
                 <div className="bg-white rounded-lg shadow p-6">
                     {activeTab === 'portfolio' && <PortfolioManager />}
                     {activeTab === 'notes' && <NotesManager />}
+                    {activeTab === 'settings' && <ChangePassword />}
                 </div>
             </div>
         </div>
